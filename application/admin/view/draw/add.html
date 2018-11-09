@@ -1,0 +1,47 @@
+{include file="common/header" /}
+<link href="/static/adminlib/webuploader/0.1.5/webuploader.css" rel="stylesheet" type="text/css" />
+<section class="Hui-article-box">
+    <nav class="breadcrumb">
+        <i class="Hui-iconfont">&#xe67f;</i><a href="{:url('index/index')}">首页</a>
+        <span class="c-gray en">&gt;</span><a href="{:url('Draw/list')}">抽奖列表</a>
+        <span class="c-gray en">&gt;</span>添加抽奖信息</nav>
+    <div class="Hui-article">
+        <article class="cl pd-20">
+            <form class="form form-horizontal" id="form-article-add" method="post" action="{:url('adddo')}">
+                
+                <div class="row cl">
+                    <label class="form-label col-xs-4 col-sm-2">标题：</label>
+                    <div class="formControls col-xs-8 col-sm-9">
+                        <input type="text"  name="title" class="input-text" placeholder="请输入抽奖标题" style="width: 500px;"></div>
+                </div>
+                <div class="row cl">
+                    <label class="form-label col-xs-4 col-sm-2">简介：</label>
+                    <div class="formControls col-xs-8 col-sm-9">
+                        <input type="text"  name="desc" class="input-text" placeholder="请输入抽奖简介" style="width: 500px;"></div>
+                </div>
+                <div class="row cl">
+                    <label class="form-label col-xs-4 col-sm-2">详情：</label>
+                    <div class="formControls col-xs-8 col-sm-9">
+                        <textarea name="detail" cols="" rows="" class="textarea" placeholder="请输入抽奖详情" dragonfly="true" style="width: 500px;"></textarea>
+                        </div>
+                </div>
+                <div class="row cl">
+                    <label class="form-label col-xs-4 col-sm-2">中奖金额：</label>
+                    <div class="formControls col-xs-8 col-sm-9">
+                        <input type="text"  name="price" class="input-text" placeholder="请输入中奖金额" style="width: 500px;"></div>
+                </div>
+                <div class="row cl">
+                    <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+                        <button  class="btn btn-primary radius" type="submit">
+                            <i class="Hui-iconfont">&#xe632;</i>提交</button>
+                        <a href="{:url('list')}"><button class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button></a></div>
+                </div>
+            </form>
+        </article>
+    </div>
+</section>
+{include file="common/test" /}
+
+</body>
+
+</html>

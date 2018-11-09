@@ -1,0 +1,66 @@
+{include file="common/header" /}
+<link href="/static/adminlib/webuploader/0.1.5/webuploader.css" rel="stylesheet" type="text/css" />
+<section class="Hui-article-box">
+    <nav class="breadcrumb">
+        <i class="Hui-iconfont">&#xe67f;</i><a href="{:url('index/index')}">首页</a>
+        <span class="c-gray en">&gt;</span><a href="{:url('Coupons/list')}">卡券管理</a>
+        <span class="c-gray en">&gt;</span>修改卡券信息
+    </nav>
+    <div class="Hui-article">
+        <article class="cl pd-20">
+            <form class="form form-horizontal" id="form-article-add" action="{:url('editdo')}" method="post">
+                <input type="hidden" name="id" value="{$list.id}">
+                <div class="row cl">
+                    <label class="form-label col-xs-4 col-sm-2">选择banner：</label>
+                    <div class="formControls col-xs-8 col-sm-9">
+                        <span class="select-box" style="width:500px">
+                            <select name="ad_id" class="select" >
+                                    <option value="{$list['ad_id']}">点击选择更换</option>
+                                {volist name="banner" id='vo'}
+                                    <option value="{$vo['id']}">{$vo['title']}</option>
+                                {/volist}
+                            </select>
+                        </span>
+                    </div>
+                </div>
+                <div class="row cl">
+                    <label class="form-label col-xs-4 col-sm-2">卡券标题：</label>
+                    <div class="formControls col-xs-8 col-sm-9">
+                        <input type="text" class="input-text" value="{$list.title}" placeholder="请输入卡券标题" id="" name="title" style="width: 500px;"></div>
+                </div>
+                <div class="row cl">
+                    <label class="form-label col-xs-4 col-sm-2">卡券金额：</label>
+                    <div class="formControls col-xs-8 col-sm-9">
+                        <input type="text" class="input-text" value="{$list.price}" placeholder="请输入卡券金额" id="" name="price" style="width: 500px;"></div>
+                </div>
+                <div class="row cl">
+                    <label class="form-label col-xs-4 col-sm-2">开始时间：</label>
+                    <div class="formControls col-xs-8 col-sm-9">
+                        <input type="text" name="start_time" class="input-text" placeholder="请输入开始时间" style="width: 500px;" value="{$list['start_time']}"></div>
+                </div>
+                <div class="row cl">
+                    <label class="form-label col-xs-4 col-sm-2">结束时间：</label>
+                    <div class="formControls col-xs-8 col-sm-9">
+                        <input type="text" name="end_time" class="input-text" placeholder="请输入结束时间" style="width: 500px;" value="{$list['end_time']}"></div>
+                </div>
+                <div class="row cl">
+                    <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+                        <button onClick="article_save_submit();" class="btn btn-primary radius" type="submit">
+                            <i class="Hui-iconfont">&#xe632;</i>提交</button>
+                        <a href="{:url('list')}"><button class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button></a></div>
+                </div>
+            </form>
+        </article>
+    </div>
+</section>
+<link rel="stylesheet" type="text/css" href="/static/adminlib/webuploader/0.1.5/webuploader.css"><!-- 引用插件css -->
+<script type="text/javascript" src="/static/adminlib/webuploader/0.1.5/webuploader.js"></script>    <!-- 引用插件js -->
+
+<!--_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="/static/adminlib/jquery/1.9.1/jquery.min.js"></script> 
+<script type="text/javascript" src="/static/adminlib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="/static/adminstatic/h-ui/js/H-ui.js"></script> 
+<script type="text/javascript" src="/static/adminstatic/h-ui.admin/js/H-ui.admin.page.js"></script>
+<!--/_footer /作为公共模版分离出去-->
+
+</html>

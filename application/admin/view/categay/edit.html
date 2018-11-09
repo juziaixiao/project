@@ -1,0 +1,44 @@
+{include file="common/header" /}
+<link href="/static/adminlib/webuploader/0.1.5/webuploader.css" rel="stylesheet" type="text/css" />
+<section class="Hui-article-box">
+    <nav class="breadcrumb">
+        <i class="Hui-iconfont">&#xe67f;</i><a href="{:url('index/index')}">首页</a>
+        <span class="c-gray en">&gt;</span><a href="{:url('Categay/list')}">广告分类管理</a>
+        <span class="c-gray en">&gt;</span>修改广告分类
+    </nav>
+    <div class="Hui-article">
+        <article class="cl pd-20">
+            <form class="form form-horizontal" id="form-article-add" action="{:url('editdo')}" method="post">
+                <input type="hidden" name="id" value="{$list.id}">
+                <div class="row cl">
+                    <label class="form-label col-xs-4 col-sm-2">名称：</label>
+                    <div class="formControls col-xs-8 col-sm-9">
+                        <input type="text" class="input-text" name="name" value="{$list.name}" placeholder="请输入广告分类名称" id="" ></div>
+                </div>
+                <div class="row cl">
+                    <label class="form-label col-xs-4 col-sm-2">简介：</label>
+                    <div class="formControls col-xs-8 col-sm-9">
+                        <textarea name="desc" cols="" rows="" class="textarea" placeholder="请输入广告分类简介" datatype="*10-100" dragonfly="true">{$list.desc}</textarea>
+                        <!-- <p class="textarea-numberbar"><em class="textarea-length">0</em>/200</p> --></div>
+                </div>
+                <div class="row cl">
+                    <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+                        <button onClick="article_save_submit();" class="btn btn-primary radius" type="submit">
+                            <i class="Hui-iconfont">&#xe632;</i>提交</button>
+                        <a href="{:url('list')}"><button class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button></a></div>
+                </div>
+            </form>
+        </article>
+    </div>
+</section>
+<link rel="stylesheet" type="text/css" href="/static/adminlib/webuploader/0.1.5/webuploader.css"><!-- 引用插件css -->
+<script type="text/javascript" src="/static/adminlib/webuploader/0.1.5/webuploader.js"></script>    <!-- 引用插件js -->
+
+<!--_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="/static/adminlib/jquery/1.9.1/jquery.min.js"></script> 
+<script type="text/javascript" src="/static/adminlib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="/static/adminstatic/h-ui/js/H-ui.js"></script> 
+<script type="text/javascript" src="/static/adminstatic/h-ui.admin/js/H-ui.admin.page.js"></script>
+<!--/_footer /作为公共模版分离出去-->
+
+</html>
