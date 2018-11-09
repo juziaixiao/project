@@ -10,8 +10,9 @@ namespace app\lib\exception;
 
 use think\exception\Handle;
 use think\facade\Log;
+use think\facade\Request;
 use think\facade\Url;
-use think\Request;
+
 
 /*
  * 重写Handle的render方法，实现自定义异常消息
@@ -32,8 +33,8 @@ class ExceptionHandler extends Handle
            $this->recordErrorLog($e);
         //如果当前模块是admin则跳转到提示信息页面
 
-            $request=new Request();
-            if( $request->module()=='admin'){
+
+            if( Request::module()=='admin'){
                 $rootinfo=[
                     'msg'=>$e->msg,
                     'errorcode'=>$e->errorCode,
