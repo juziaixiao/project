@@ -20,7 +20,7 @@ use think\Db;
 class Drawlog extends Model
 
 {
-    protected $table='ad_user_draw';//指定中奖纪录表
+    protected $table='ad_user_draw';//中奖纪录表
 
     /**
      * @access public
@@ -28,13 +28,9 @@ class Drawlog extends Model
      * @context 中奖记录列表
      */
     public static function list(){
-//        $list = self::where('delete_time','null') -> select();
-
         $list = self::with(['draw'])
             -> where('delete_time','null')
             -> select();
-//
-//        dump($list);die();
         return $list;
     }
 
@@ -42,23 +38,5 @@ class Drawlog extends Model
         return $this->hasOne('Draw','id','draw_id');
     }
 
-    /**
-     * @access public
-     * @return mixed
-     * @context 删除中奖记录
-     */
-    public static function dellog(){
-        $where['id'] = array('>',1);
-        $log = self::where('delete_time',null) -> where($where) -> select();
-        dump($log);die();
-
-        $log->delete_time = time();
-        $state = $log->save();
-        if($state>0){
-            return true;
-        }else{
-            //删除失败
-        }
-    }
 
 }

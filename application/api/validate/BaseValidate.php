@@ -6,7 +6,8 @@ use app\lib\enum\ScopeEnum;
 use app\lib\exception\ForbiddenException;
 use app\lib\exception\ParameterException;
 use app\lib\exception\TokenException;
-use think\Request;
+
+use think\facade\Request;
 use think\Validate;
 
 /**
@@ -25,15 +26,14 @@ class BaseValidate extends Validate
     public function goCheck()
     {
         //必须设置contetn-type:application/json
-
-        $request =new Request();
+        $request = Request::instance();
         $params = $request->param();
-       // dump($request->header('token'));exit;
         $params['token'] = $request->header('token');
-     //  dump($this->batch()->check($params));exit;
-//!$this->batch()->check($params)
-        if (!$this->batch()->check($params)) {
+
+        if (!$this->check($params)) {
+
             $exception = new ParameterException(
+
                 [
                     // $this->error有一个问题，并不是一定返回数组，需要判断
                     'msg' => is_array($this->error) ? implode(

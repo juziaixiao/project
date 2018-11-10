@@ -1,6 +1,6 @@
 <?php
 /**
- * @广告
+ * @商圈抽奖
  * @version 1.0
  * @author 丁文爽
  * @date 2018/11/7
@@ -14,7 +14,7 @@ use think\Controller;
 use app\admin\model\Drawlog as DrawlogModel;
 use think\Request;
 
-class Drawlog extends Controller
+class Drawlog extends Basecontroller
 {
     /**
      * @access public

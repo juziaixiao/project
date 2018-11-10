@@ -12,6 +12,8 @@ namespace app\admin\model;
 
 use think\Model;
 use think\Request;
+use app\admin\validate\Drawnew;
+use app\lib\exception\ParameterException;
 
 class Draw extends Model
 
@@ -36,6 +38,7 @@ class Draw extends Model
     public static function adddo(){
         $request = new Request();
         $post = $request->post();
+        (new Drawnew())->goCheck();
         if($post){
            $draw = new Draw([
                 'title' =>  $post['title'],
@@ -48,10 +51,10 @@ class Draw extends Model
             if($result>0){
                 return true;
             }else{
-                //添加错误
+                throw new ParameterException(['errorCode' => 'AD10021', 'msg' => '添加数据失败!']);
             }
         }else{
-            //获取数据失败
+            throw new ParameterException(['errorCode' => 'AD10020', 'msg' => '获取数据失败!']);
         }
     }
 
@@ -69,21 +72,22 @@ class Draw extends Model
             if($list){
                 return $list;
             }else{
-                //抽奖数据获取失败！
+                throw new ParameterException(['errorCode' => 'AD10023', 'msg' => '抽奖数据获取失败！']);
             }
         }else{
-            //获取抽奖信息失败!
+            throw new ParameterException(['errorCode' => 'AD10022', 'msg' => '获取抽奖信息失败!']);
         }
     }
 
     /**
      * @access public
      * @return mixed
-     * @context 修改抽奖页
+     * @context 执行修改抽奖
      */
     public static function editdo(){
         $request = new Request();
         $post = $request->post();
+        (new Drawnew())->goCheck();
         if($post){
             $list = self::where('id',$post['id']) -> where('delete_time','null') ->find();
             if($list){
@@ -96,13 +100,13 @@ class Draw extends Model
                 if($result>0){
                     return true;
                 }else{
-                    //修改修改点券失败！
+                    throw new ParameterException(['errorCode' => 'AD10026', 'msg' => '修改抽奖信息失败！']);
                 }
             }else{
-                //查询数据失败！
+                throw new ParameterException(['errorCode' => 'AD10025', 'msg' => '查询数据失败！']);
             }
         }else{
-            //数据传输失败！
+            throw new ParameterException(['errorCode' => 'AD10024', 'msg' => '数据传输失败！']);
         }
     }
 

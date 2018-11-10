@@ -86,7 +86,7 @@ class Banner extends Controller
         $post = $request->post('id');
         $id = explode(",", $post);
         if(count($id)>0){
-            $delResult = CategayModel::Where(['id' => $id])
+            $delResult = BannerModel::Where(['id' => $id])
                 ->update(['delete_time' => time()]);
             if($delResult){
                 return json(['code' => 200]);

@@ -33,7 +33,7 @@ class ExceptionHandler extends Handle
            $this->recordErrorLog($e);
         //如果当前模块是admin则跳转到提示信息页面
 
-
+            //dump(123);exit;
             if( Request::module()=='admin'){
                 $rootinfo=[
                     'msg'=>$e->msg,

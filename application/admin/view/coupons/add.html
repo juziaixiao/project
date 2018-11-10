@@ -30,21 +30,19 @@
                     <div class="formControls col-xs-8 col-sm-9">
                         <input type="text" name="price" class="input-text" placeholder="请输入卡券金额" style="width: 500px;"></div>
                 </div>
-                <!-- <div class="row cl">
-                    <label class="form-label col-xs-4 col-sm-2">开始时间：</label>
-                    <div class="formControls col-xs-8 col-sm-9">
-                        <input type="text" onfocus="WdatePicker({maxDate:'#F{ $dp.$D(\'logmax\')||\'%y-%M-%d\'}'})" id="logmin" class="input-text Wdate" style="width:120px;" name="start_time"></div>
-                </div> -->
                 <div class="row cl">
                     <label class="form-label col-xs-4 col-sm-2">开始时间：</label>
                     <div class="formControls col-xs-8 col-sm-9">
-                        <input type="text" name="start_time" class="input-text" placeholder="请输入开始时间" style="width: 500px;"></div>
+                        <input type="text" onfocus="WdatePicker({minDate:'#F{ $dp.$D(\'logmax\')}',maxDate:'%y-%M-%d'})" id="logmax" class="input-text Wdate" style="width:120px;" name="start_time">
+                    </div>
                 </div>
                 <div class="row cl">
                     <label class="form-label col-xs-4 col-sm-2">结束时间：</label>
                     <div class="formControls col-xs-8 col-sm-9">
-                        <input type="text" name="end_time" class="input-text" placeholder="请输入结束时间" style="width: 500px;"></div>
+                        <input type="text" onfocus="WdatePicker({maxDate:'#F{ $dp.$D(\'logmin\')||\'%y-%M-%d\'}'})" id="logmin" class="input-text Wdate" style="width:120px;" name="end_time">
+                    </div>
                 </div>
+
                 <div class="row cl">
                     <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
                         <button  class="btn btn-primary radius" type="submit">

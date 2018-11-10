@@ -1,6 +1,6 @@
 <?php
 /**
- * @广告
+ * @商圈抽奖
  * @version 1.0
  * @author 丁文爽
  * @date 2018/11/8
@@ -12,6 +12,8 @@ namespace app\admin\model;
 
 use think\Model;
 use think\Request;
+use app\admin\validate\Couponsnew;
+use app\lib\exception\ParameterException;
 use app\admin\model\Draw as DrawModel;
 
 class Coupons extends  Model
@@ -43,29 +45,26 @@ class Coupons extends  Model
     public static function adddo(){
         $request = new Request();
         $post = $request->post();
+        (new Couponsnew())->goCheck();
         if($post){
-            if($post['ad_id']) {//判断是否存在banner
-                $user = new Coupons([
-                    'ad_id' =>  $post['ad_id'],
-                    'title' => $post['title'],
-                    'price' => $post['price'],
-                    'state' => 1,
-                    'pass' => time().rand(1000,9999),
-                    'start_time' => $post['start_time'],
-                    'end_time' => $post['end_time'],
-                    'create_time' => time()
-                ]);
-                $result = $user->save();
-                if($result>0){
-                    return true;
-                }else{
-                    //添加错误
-                }
+            $user = new Coupons([
+                'ad_id' =>  $post['ad_id'],
+                'title' => $post['title'],
+                'price' => $post['price'],
+                'state' => 1,
+                'pass' => time().rand(1000,9999),
+                'start_time' => strtotime($post['start_time']),
+                'end_time' => strtotime($post['end_time']),
+                'create_time' => time()
+            ]);
+            $result = $user->save();
+            if($result>0){
+                return true;
             }else{
-                //没有banner 请先添加banner
+                throw new ParameterException(['errorCode' => 'AD10015', 'msg' => '添加数据失败!']);
             }
         }else{
-            //获取数据失败
+            throw new ParameterException(['errorCode' => 'AD10014', 'msg' => '获取数据失败!']);
         }
     }
 
@@ -83,10 +82,10 @@ class Coupons extends  Model
             if($list){
                 return $list;
             }else{
-                //卡券数据获取失败！
+                throw new ParameterException(['errorCode' => 'AD10017', 'msg' => '卡券数据获取失败！']);
             }
         }else{
-            //获取卡券信息失败!
+            throw new ParameterException(['errorCode' => 'AD10016', 'msg' => '获取卡券信息失败!']);
         }
     }
 
@@ -98,26 +97,27 @@ class Coupons extends  Model
     public static function editdo(){
         $request = new Request();
         $post = $request->post();
+        (new Couponsnew())->goCheck();
         if($post){
             $list = self::where('id',$post['id']) -> where('delete_time','null') ->find();
             if($list){
                 $list->ad_id = $post['ad_id'];
                 $list->title = $post['title'];
                 $list->price = $post['price'];
-                $list->start_time = $post['start_time'];
-                $list->end_time = $post['end_time'];
+                $list->start_time = strtotime($post['start_time']);
+                $list->end_time = strtotime($post['end_time']);
                 $list->update_time = time();
                 $result = $list->save();
                 if($result>0){
                     return true;
                 }else{
-                    //修改修改点券失败！
+                    throw new ParameterException(['errorCode' => 'AD10019', 'msg' => '修改修改点券失败！']);
                 }
             }else{
-                //查询数据失败！
+                throw new ParameterException(['errorCode' => 'AD10019', 'msg' => '查询数据失败！']);
             }
         }else{
-            //数据传输失败！
+            throw new ParameterException(['errorCode' => 'AD10018', 'msg' => '数据传输失败！']);
         }
     }
 
@@ -132,14 +132,5 @@ class Coupons extends  Model
             -> select();
         return $list;
     }
-
-//    public function banner(){
-//        return $this->hasOne('Banner','id','ad_id');
-//    }
-
-
-
-
-
 
 }

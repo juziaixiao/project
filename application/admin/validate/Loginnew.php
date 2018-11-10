@@ -11,7 +11,10 @@ namespace app\admin\validate;
 
 class Loginnew extends Adminvalidate
 {
-    protected $rule = ['username' => 'require', 'password' => 'require'];
+    protected $rule = [
+        'username' => 'require',
+        'password' => 'require'
+    ];
 
     protected $message = [
         'username' => '账号不能为空！',

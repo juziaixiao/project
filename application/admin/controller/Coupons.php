@@ -5,7 +5,7 @@
  * @author 丁文爽
  * @date 2018/11/7
  * @email:d_w@chunyimail.com
- * @context banner
+ * @context 卡券
  */
 
 namespace app\admin\controller;
@@ -16,7 +16,7 @@ use app\admin\model\Coupons as CouponsModel;
 use app\admin\model\Draw as DrawModel;
 use think\Request;
 
-class Coupons extends Controller
+class Coupons extends Basecontroller
 {
     /**
      * @access public

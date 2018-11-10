@@ -1,6 +1,6 @@
 <?php
 /**
- * @广告
+ * @商圈抽奖
  * @version 1.0
  * @author 丁文爽
  * @date 2018/11/8
@@ -15,7 +15,7 @@ use app\admin\model\Drawarea as DrawareaModel;
 use app\admin\model\Draw as DrawModel;
 use think\Request;
 
-class Drawarea extends Controller
+class Drawarea extends Basecontroller
 {
     /**
      * @access public
@@ -36,8 +36,6 @@ class Drawarea extends Controller
      * @context 中奖区域添加页
      */
     public function add(){
-//        $list = DrawModel::getbanner();
-//        $this -> assign('list',$list);
         return view();
     }
 

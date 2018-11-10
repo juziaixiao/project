@@ -1,21 +1,19 @@
 <?php
 /**
- * @广告
+ * @商圈抽奖
  * @version 1.0
  * @author 丁文爽
  * @date 2018/11/3
  * @email:d_w@chunyimail.com
- * @context 登陆
+ * @context 抽奖设置
  */
 
 namespace app\admin\model;
 
 use think\Model;
-use think\facade\Session;
 use think\Request;
-
+use app\admin\validate\Drawareanew;
 use app\lib\exception\ParameterException;
-use think\Db;
 
 class Drawarea extends Model
 
@@ -28,24 +26,7 @@ class Drawarea extends Model
      * @context 中奖区域列表
      */
     public static function list(){
-        $request = new Request();
-        $post = $request->post();
-//        dump($post);die();
-//        if($post || $post['start_time']!='' || $post['end_time']!=''){
-//            $where['create_time'] = array('>',strtotime($post['start_time']));
-//            $where['create_time'] = array('<',strtotime($post['end_time']));
-//        }
-//        $map['delete_time']  = array('exp',' is NULL');
-//        $where['delete_time'] = array('exp','is NULL');
-//        $list = self::where($where) -> order('create_time','desc') -> select();
-//        $list = self::where('delete_time','null')-> order('create_time','desc') -> select();
-
-//        $list = self::with(['draw'])
-//            -> where('delete_time','null')
-//            -> select();
         $list = self::where('delete_time','null')->select();
-
-//        dump($list);die();
         return $list;
     }
 
@@ -61,9 +42,7 @@ class Drawarea extends Model
     public static function adddo(){
         $request = new Request();
         $post = $request->post();
-
-        //这里需要做一个数据验证
-
+        (new Drawareanew())->goCheck();
         $draw = new Drawarea([
             'regm_name' =>  $post['regm_name'],
             'luck_count'  =>  $post['luck_count'],
@@ -73,7 +52,7 @@ class Drawarea extends Model
         if($result>0){
             return true;
         }else{
-            //添加错误
+            throw new ParameterException(['errorCode' => 'AD10027', 'msg' => '添加数据失败!']);
         }
     }
 
@@ -91,10 +70,10 @@ class Drawarea extends Model
             if($drawarea){
                 return $drawarea;
             }else{
-                //抽奖区域数据获取失败！
+                throw new ParameterException(['errorCode' => 'AD10029', 'msg' => '修改抽奖数据失败!']);
             }
         }else{
-            //获取抽奖区域id错误!
+            throw new ParameterException(['errorCode' => 'AD10028', 'msg' => '获取抽奖数据失败!']);
         }
     }
 
@@ -106,6 +85,7 @@ class Drawarea extends Model
     public static function editdo(){
         $request = new Request();
         $post = $request->post();
+        (new Drawareanew())->goCheck();
         if($post){
             $drawarea = self::where('id',$post['id']) -> where('delete_time','null') ->find();
             if($drawarea){
@@ -116,12 +96,14 @@ class Drawarea extends Model
                 if($result>0){
                     return true;
                 }else{
+                    throw new ParameterException(['errorCode' => 'AD10032', 'msg' => '修改中奖区域失败！']);
                     //修改中奖区域失败！
                 }
             }else{
-                //查询数据失败！
+                throw new ParameterException(['errorCode' => 'AD10031', 'msg' => '查询数据失败！']);
             }
         }else{
+            throw new ParameterException(['errorCode' => 'AD10030', 'msg' => '数据传输失败！']);
             //数据传输失败！
         }
     }

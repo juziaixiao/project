@@ -9,8 +9,10 @@
  */
 namespace app\admin\controller;
 use think\Controller;
+use think\facade\Request;
+
 //use think\Config;
-//use think\Request;
+
 //use think\Session;
 
 class Index extends Controller
@@ -24,6 +26,20 @@ class Index extends Controller
     public function index(){
         return view();
 
+    }
+
+
+    public function adError(){
+        header("Content-type: text/html; charset=utf-8");
+        $info = Request::instance()->param();
+        return view('aderror',array('msg'=>$info['msg'],'errorcode'=>$info['errorcode'],'code'=>$info['code']));
+    }
+
+
+    public function loginerror(){
+        header("Content-type: text/html; charset=utf-8");
+        $info = Request::instance()->param();
+        return view('loginerror',array('msg'=>$info['msg'],'errorcode'=>$info['errorcode'],'code'=>$info['code']));
     }
 
 }

@@ -9,8 +9,7 @@
  */
 namespace app\admin\controller;
 use think\Controller;
-use think\Request;
-use think\Session;
+use think\facade\Session;
 use app\admin\model\Login as LoginModel;
 
 
@@ -32,7 +31,10 @@ class Login extends Controller{
      */
     public function dologin(){
         $status = LoginModel::dologin();
-        $this -> success("登陆成功",'/admin/Index/index');
+        if($status == 1){
+            $this -> success("登陆成功",'/admin/Index/index');
+        }
+
     }
 
     /**
