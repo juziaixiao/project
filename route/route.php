@@ -8,3 +8,6 @@
  * 并在一定程度上提高路由匹配的效率
  */
 use think\facade\Route;
+//Sample
+
+
